@@ -5,12 +5,18 @@ import (
 	"html/template"
 	"net/http"
 	"time"
+	"encoding/json"
 )
 
 // Create a struct that holds information to be displayed in our HTML file
 type Welcome struct {
 	Name string
 	Time string
+}
+
+type JsonResponse struct{
+	Value1 string `json:"key1"`
+	Value2 string `json:"key2"`
 }
 
 // Go application entrypoint
@@ -23,6 +29,10 @@ func main() {
 	// the relative path). We wrap it in a call to template.Must() which handles any errors and halts if there are fatal errors
 
 	templates := template.Must(template.ParseFiles("templates/welcome-template.html"))
+	JsonResp := JsonResponse{
+		Value1: "some Data",
+		Value2: "other Data",
+	}
 
 	//Our HTML comes with CSS that go needs to provide when we run the app. Here we tell go to create
 	// a handle that looks in the static directory, go then uses the "/static/" as a url that our
@@ -48,6 +58,9 @@ func main() {
 		if err := templates.ExecuteTemplate(w, "welcome-template.html", welcome); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+	})
+	http.HandleFunc("/jsonResponse", func(w http.ResponseWriter, r *http.Request)  {
+		json.NewEncoder(w).Encode(JsonResp)
 	})
 
 	//Start the web server, set the port to listen to 8080. Without a path it assumes localhost
