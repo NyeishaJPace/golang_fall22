@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 	"encoding/json"
+	
 )
 
 // Create a struct that holds information to be displayed in our HTML file
@@ -26,10 +27,15 @@ type JsonNested struct {
 }
 
 // Go application entrypoint
-func main() {
+ func main() {
+	fetch("https://jsonplaceholder.ir/users");{
+	
+		,then(response => response.json())
+		.then(json => console.log(json)),
+	}
 	//Instantiate a Welcome struct object and pass in some random information.
 	//We shall get the name of the user as a query parameter from the URL
-	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
+	/* welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
 
 	//We tell Go exactly where we can find our html file. We ask Go to parse the html file (Notice
 	// the relative path). We wrap it in a call to template.Must() which handles any errors and halts if there are fatal errors
@@ -46,6 +52,8 @@ func main() {
 		Value2: "other Data",
 		JsonNested: nested,
 	}
+
+	
 
 	//Our HTML comes with CSS that go needs to provide when we run the app. Here we tell go to create
 	// a handle that looks in the static directory, go then uses the "/static/" as a url that our
@@ -80,4 +88,6 @@ func main() {
 	//Print any errors from starting the webserver using fmt
 	fmt.Println("Listening")
 	fmt.Println(http.ListenAndServe(":8080", nil))
-}
+} */
+
+
