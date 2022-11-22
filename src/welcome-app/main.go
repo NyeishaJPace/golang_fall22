@@ -1,23 +1,40 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
-	"net/http"
+	"fmt"
+	//"io/ioutil"
+	//"log"
+	//"net/http"
 )
 
-func main() {
-	resp, err := http.Get("https://jsonplaceholder.typicode.com/users")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	sb := string(body)
-	log.Printf(sb)
+type Intern struct {
+	name string
+	email string
+	address string
+
 }
+
+type Employer struct {
+	name string
+	email string
+	address string
+
+}
+
+func main(){
+	result := Employer {
+		name: "Jazmine",
+		email: "Sinere@arpil.biz",
+		address: "Kulas Light Gwenborough 92998",
+	}
+	fmt.Println("Employer name: ", result.name)
+	fmt.Println("Employer's email: ", result.email)
+
+}
+
+
+
+
 
 
 /*
