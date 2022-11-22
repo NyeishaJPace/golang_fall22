@@ -29,10 +29,10 @@ type College struct {
 }
 
 type Employer struct {
-	name string
-	email string
-	phone int
-	details Intern
+	Name string	`json:"name"`
+	Email string	`json:"email"`	
+	Phone int	`json:"phone"`
+	Details Intern	`json:"details"`
 
 }
 
@@ -40,10 +40,10 @@ func main(){
 	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
 	templates := template.Must(template.ParseFiles("templates/welcome-template.html"))
 	result := Employer {
-		name: "Leanne Graham",
-		email: "Sinere@arpil.biz",
-		phone: 17707368031,
-		details: Intern{"Chelsey Dietrich","Lucio_Hettinger@annie.ca", `Skiles Walks Apt 351 Roscoeview LA 33263`},
+		Name: "Leanne Graham",
+		Email: "Sinere@arpil.biz",
+		Phone: 17707368031,
+		Details: Intern{"Chelsey Dietrich","Lucio_Hettinger@annie.ca", `Skiles Walks Apt 351 Roscoeview LA 33263`},
 		
 	}
 
@@ -53,13 +53,13 @@ func main(){
 		catchPhrase: "revolutionize end-to-end systems",
 	}
 
-	fmt.Println("Employer name: ", result.name)
-	fmt.Println("Employer's email: ", result.email)
-	fmt.Println("Phone number: ", result.phone)
+	fmt.Println("Employer name: ", result.Name)
+	fmt.Println("Employer's email: ", result.Email)
+	fmt.Println("Phone number: ", result.Phone)
 
-	fmt.Println("Intern name: ", result.details.name)
-	fmt.Println("Intern email: ", result.details.email)
-	fmt.Println("Intern address: ", result.details.address)
+	fmt.Println("Intern name: ", result.Details.name)
+	fmt.Println("Intern email: ", result.Details.email)
+	fmt.Println("Intern address: ", result.Details.address)
 
 	fmt.Println("College name: ", description.university)
 	fmt.Println("College website: ", description.website)
