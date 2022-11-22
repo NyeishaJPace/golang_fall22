@@ -27,21 +27,34 @@ type Employer struct {
 	phone int
 	details Intern
 
-
 }
 
 func main(){
 	result := Employer {
 		name: "Leanne Graham",
 		email: "Sinere@arpil.biz",
-		phone: 1-770-736-8031,
-		details: Intern{"Chelsey Dietrich","Lucio_Hettinger@annie.ca", Skiles Walks Apt 351 Roscoeview LA 33263},
+		phone: 17707368031,
+		details: Intern{"Chelsey Dietrich","Lucio_Hettinger@annie.ca", `Skiles Walks Apt 351 Roscoeview LA 33263`},
+		
 	}
 
+	description := College {
+		university: "Keebler University",
+		website: "demarco.info",
+		catchPhrase: "revolutionize end-to-end systems",
+	}
 
 	fmt.Println("Employer name: ", result.name)
 	fmt.Println("Employer's email: ", result.email)
 	fmt.Println("Phone number: ", result.phone)
+
+	fmt.Println("Intern name: ", result.details.name)
+	fmt.Println("Intern email: ", result.details.email)
+	fmt.Println("Intern address: ", result.details.address)
+
+	fmt.Println("College name: ", description.university)
+	fmt.Println("College website: ", description.website)
+	fmt.Println("College catchphrase: ", description.catchPhrase)
 
 }
 
