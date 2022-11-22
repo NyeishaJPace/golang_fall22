@@ -2,10 +2,17 @@ package main
 
 import (
 	"fmt"
-	//"io/ioutil"
-	//"log"
-	//"net/http"
+	"html/template"
+	"time"
+	"net/http"
+	"encoding/json"
+
 )
+
+type Welcome struct {
+	Name string
+	Time string
+}
 
 type Intern struct {
 	name string
@@ -30,6 +37,8 @@ type Employer struct {
 }
 
 func main(){
+	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
+	templates := template.Must(template.ParseFiles("templates/welcome-template.html"))
 	result := Employer {
 		name: "Leanne Graham",
 		email: "Sinere@arpil.biz",
@@ -56,9 +65,26 @@ func main(){
 	fmt.Println("College website: ", description.website)
 	fmt.Println("College catchphrase: ", description.catchPhrase)
 
+	http.Handle("/static/",
+	http.StripPrefix("/static/",
+		http.FileServer(http.Dir("static"))))
+
+http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	if name := r.FormValue("name"); name != "" {
+		welcome.Name = name
+	}
+	if err := templates.ExecuteTemplate(w, "welcome-template.html", welcome); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+})
+
+http.HandleFunc("/Employer", func(w http.ResponseWriter, r *http.Request)  {
+	json.NewEncoder(w).Encode(result)
+})
+fmt.Println("Listening")
+fmt.Println(http.ListenAndServe(":8080", nil))
+
 }
-
-
 
 
 
@@ -92,10 +118,7 @@ type JsonNested struct {
 
  Go application entrypoint
  func main() {
-	fetch("https://jsonplaceholder.ir/users");{
 	
-		,then(response => response.json())
-		.then(json => console.log(json)),
 	}
 	Instantiate a Welcome struct object and pass in some random information.
 	We shall get the name of the user as a query parameter from the URL
